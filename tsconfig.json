@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "ES2020", // на яку версію JS компілювати
+        "module": "commonjs", // тип модулів для Node.js
+        "rootDir": "./src", // вхідна папка із .ts-файлами
+        "outDir": "./dist", // куди викидати згенеровані .js
+        "strict": true, // увімкнути суворий режим перевірок
+        "esModuleInterop": true, // для коректного імпорту CJS-модулів
+        "skipLibCheck": true // пропуск перевірок типів у node_modules
+    },
+    "include": ["src/**/*"], // які файли/папки компілювати
+    "exclude": ["node_modules"] // що пропускати
+}
