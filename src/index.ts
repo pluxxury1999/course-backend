@@ -1,22 +1,19 @@
-// src/index.ts
+import "dotenv/config";
 
-// Підключаємо Express через require
-const express = require("express");
+import app from "./app";
+import { connectDB } from "./config/database";
 
-// Для типізації Request та Response можна імпортувати тільки типи
-
-import type { Request, Response } from "express";
-
-const app = express();
 const PORT = process.env.PORT || 3000;
+const MONGO_URI = process.env.MONGO_URI!;
 
-// Middleware для розбору JSON-тіла запитів
-app.use(express.json());
+async function start() {
+    if (!MONGO_URI) {
+        console.error("Missing MONGO_URI in .env");
+        process.exit(1);
+    }
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("Hello from Express + TypeScript (CommonJS)111!");
-});
+    await connectDB(MONGO_URI);
+    app.listen(PORT, () => console.log(`🚀 Server listening on port ${PORT}`));
+}
 
-app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
-});
+start().catch((err) => console.error("Server error:", err));
