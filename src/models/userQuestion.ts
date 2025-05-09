@@ -7,11 +7,14 @@ export interface IUserQuestion extends Document {
     answer: string;
 }
 
-const userQuestionSchema = new Schema<IUserQuestion>({
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    question: { type: String, required: true },
-    answer: { type: String, required: true },
-});
+const userQuestionSchema = new Schema<IUserQuestion>(
+    {
+        name: { type: String, required: true },
+        email: { type: String, required: true },
+        question: { type: String, required: true },
+        answer: { type: String, required: false },
+    },
+    { collection: "user-questions" }
+);
 
 export const UserQuestion = model<IUserQuestion>("UserQuestion", userQuestionSchema);
